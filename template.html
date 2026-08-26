@@ -1,0 +1,44 @@
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  PAGE TEMPLATE                                            ║
+  ║  To create a new page:                                    ║
+  ║  1. Copy this file and rename it (e.g. my-page.html)      ║
+  ║  2. Set <title> and body[data-page] below                 ║
+  ║     (data-page must match a data-page in includes/nav.html║
+  ║     for that nav link to highlight as active)             ║
+  ║  3. Replace the <section> content with your own            ║
+  ║  4. Use textMediaBlock({...}) from components.js to add   ║
+  ║     text+media rows without hand-writing markup            ║
+  ╚══════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Title — Jack Bell</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="">
+  <div class="page-shell">
+    <div id="site-nav"></div>
+
+    <section id="page-body"></section>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="assets/js/include.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    document.getElementById('page-body').innerHTML =
+      textMediaBlock({
+        text: `Write your first paragraph here.
+Add a second line and it becomes its own paragraph.`,
+        media: 'assets/images/example.jpg',
+        mediaType: 'image', // or 'video' for .mp4/.webm files
+        reverse: false      // true = media on the left, text on the right
+      });
+  </script>
+</body>
+</html>

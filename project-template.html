@@ -1,0 +1,132 @@
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  PROJECT PAGE TEMPLATE                                    ║
+  ║  To write up a new project:                               ║
+  ║  1. Copy this file and rename it (e.g. zen-dwarves.html)  ║
+  ║  2. Put its media in assets/images/<project-slug>/ and    ║
+  ║     assets/videos/<project-slug>/                          ║
+  ║  3. Fill in the `project` object below — no HTML/CSS to   ║
+  ║     write. Everything is rendered by renderProjectPage()  ║
+  ║     in assets/js/components.js.                            ║
+  ║  4. Add a projectCard({...}) call for it on index.html    ║
+  ║     (or games.html) linking to this file.                 ║
+  ║                                                             ║
+  ║  Section jump-links and "Back to top" are generated        ║
+  ║  automatically from the sections you list — you don't      ║
+  ║  need to build navigation by hand.                          ║
+  ║  `credits` and `heroMedia` are both optional — delete       ║
+  ║  them if a project doesn't need one.                        ║
+  ╚══════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Title — Jack Bell</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="games">
+  <div class="page-shell">
+    <div id="site-nav"></div>
+
+    <div id="page-body"></div>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="assets/js/include.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    const project = {
+      title: 'Project Title',
+      tagline: 'One or two sentences describing the project.',
+      roles: 'Your role(s) on the project',
+      tags: ['Unreal Engine', 'VR'],
+
+      // Optional — delete this key if there's no single hero image/video.
+      // For a local hero video (type: 'video'), it plays as a normal
+      // player by default — controls shown, sound on, plays once. Add
+      // muted: true, autoplay: true, loop: true to make it an autoplaying
+      // background clip instead (the opposite of a body block's defaults).
+      // A 'youtube' hero is always just a plain embed (see mediaType note
+      // below — YouTube's own UI can't reliably be stripped down).
+      heroMedia: { src: 'assets/images/project-slug/splash.jpg', type: 'image' },
+
+      // Optional — delete this key if the project has no team to credit.
+      credits: [
+        { role: 'Role', name: 'Name' }
+      ],
+
+      // Optional — shown between the credits table and the section
+      // jump-nav. Same block shape as inside a section (see below).
+      // Delete this key if the project doesn't need an intro blurb.
+      intro: [
+        {
+          text: `A short intro paragraph, shown before the reader jumps into any one section.`
+          // No `media` key at all -> renders as plain, centered text
+          // instead of the usual side-by-side text+media layout.
+        }
+      ],
+
+      // One entry per top-level section. Each gets an auto-generated
+      // jump-nav pill and a "Back to top" button — you don't write those
+      // by hand. Sections are for general-audience info and are always
+      // visible.
+      sections: [
+        {
+          id: 'overview',              // used for the #anchor and jump-nav link
+          heading: 'Overview',
+          blocks: [                    // one or more text+media rows, top to bottom
+            {
+              text: `First paragraph.
+Second paragraph — each line becomes its own <p>. Supports *italics*,
+**bold**, and [link text](https://example.com).`,
+              // Omit `media` entirely for a plain, centered text block.
+              media: 'assets/images/project-slug/splash.jpg',
+              // 'image' (default) | 'video' (local .mp4/.webm) | 'youtube'
+              // | 'gdrive' | 'blueprintue' — for the embed types, just
+              // paste the normal URL you'd copy from that site. 'youtube'
+              // is always a plain, normal embed (controls and all) —
+              // YouTube doesn't give a reliable way to strip its UI down,
+              // so muteToggle/hideControls/autoplay/loop/muted below only
+              // do anything for 'video'.
+              mediaType: 'image',
+              // 'video' only — false (default) is a silent looping clip;
+              // true adds a hover-to-reveal speaker button so the viewer
+              // can turn sound on/off.
+              muteToggle: false,
+              // 'video' only — true (default) hides the native video
+              // controls; set false to show them.
+              hideControls: true
+              // No `reverse` key needed — renderBlocks() alternates the
+              // media side automatically (text-only blocks don't count).
+            }
+          ],
+
+          // Optional — for deeper technical breakdowns that shouldn't
+          // clutter the general write-up. Rendered collapsed by default
+          // (click to expand), and NOT included in the jump-nav. Delete
+          // this key entirely if a section has no subsections.
+          subsections: [
+            {
+              id: 'overview-deep-dive',
+              heading: 'How It Actually Works',
+              blocks: [
+                {
+                  text: `The technical details go here.`,
+                  media: 'https://www.youtube.com/watch?v=XXXXXXXXXXX',
+                  mediaType: 'youtube'
+                }
+              ]
+            }
+          ]
+        }
+        // Add as many sections (and subsections) as the project needs.
+      ]
+    };
+
+    document.getElementById('page-body').innerHTML = renderProjectPage(project);
+  </script>
+</body>
+</html>

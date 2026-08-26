@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack Bell — Gameplay Programmer/Designer</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="home">
+  <div class="page-shell">
+    <div id="site-nav"></div>
+
+    <section class="hero">
+      <div class="hero-photo" style="background-image:url('assets/images/profile.jpg')"></div>
+      <div class="hero-info">
+        <h1 class="hero-name">JACK BELL</h1>
+        <p class="hero-subtitle">Gameplay Programmer/Designer</p>
+        <p class="hero-email">&#9993; jack@bellhastold.com</p>
+        <p class="hero-bio">
+          Technically minded designer with a proven history as a development lead.
+          Specialising in XR Design, novel game mechanics, integrating discrete
+          systems, and IoT applications.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-heading">Featured</h2>
+      <div class="project-grid" id="featured-projects"></div>
+    </section>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="assets/js/include.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    document.getElementById('featured-projects').innerHTML = [
+      projectCard({
+        image: 'assets/images/sounds-of-adventure/splash.jpg',
+        title: 'Sounds Of Adventure',
+        roles: 'Project lead; Dev lead',
+        description: 'A full body VR rhythm adventure game.',
+        tags: ['Unreal Engine', 'MIDI', 'VR'],
+        href: 'sounds-of-adventure.html'
+      }),
+      projectCard({
+        image: 'assets/images/sushi-ben/splash.jpg',
+        title: 'Sushi Ben',
+        roles: 'Gameplay Engineer; Minigame Designer',
+        description: 'VR and Non-VR anime-inspired, slice of life game.',
+        tags: ['Unreal Engine', 'Niagara', 'VR'],
+        href: 'sushi-ben.html'
+      }),
+      projectCard({
+        image: 'assets/images/arcane-melodies/splash.jpg',
+        title: 'Arcane Melodies',
+        roles: 'Project lead; Dev lead',
+        description: 'A short film showcasing the ability to have a live musical performance drive an XR stage environment.',
+        tags: ['Unreal Engine', 'MIDI', 'XR Stage'],
+        href: 'arcane-melodies.html'
+      })
+    ].join('');
+  </script>
+</body>
+</html>

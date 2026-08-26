@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcane Melodies — Jack Bell</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="games">
+  <div class="page-shell">
+    <div id="site-nav"></div>
+
+    <div id="page-body"></div>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="assets/js/include.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    const project = {
+      title: 'Arcane Melodies',
+      tagline: 'A short film showcasing the ability to have a live musical performance drive an XR stage environment.',
+      roles: 'Project lead; Dev lead',
+      tags: ['Unreal Engine', 'MIDI', 'XR Stage'],
+      heroMedia: { src: 'https://drive.google.com/file/d/1MO1zy0ATSfjqaVKE_SapN5dMCJzyRuyT/view', type: 'gdrive' },
+      sections: [
+        {
+          id: 'overview',
+          heading: 'Overview',
+          blocks: [
+            {
+              text: `Arcane Melodies was a short video, filmed on an XR Stage (LED Volume). The project was primarily a tech demo; the goal was to showcase the ability to take a live musical performance, and — using MIDI — have the environment around them react in real time (like the lightning effects in our scene).
+We also showcased the ability to have a live synth/sampler (built with Unreal Engine's Meta Sounds) play notes based off of the performer's MIDI input, and both record the audio from this into the video, as well as allowing the performers to hear audio from the game engine on the stage — something that, perhaps surprisingly, is not a trivial task for this kind of setup.`,
+              media: 'assets/images/arcane-melodies/splash.jpg',
+              mediaType: 'image',
+            }
+          ]
+        }
+      ]
+    };
+
+    document.getElementById('page-body').innerHTML = renderProjectPage(project);
+  </script>
+</body>
+</html>
