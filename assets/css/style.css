@@ -221,6 +221,7 @@ img { max-width: 100%; display: block; }
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;
   gap: 1.75rem;
   padding: 0 3rem 4rem;
 }
@@ -236,6 +237,8 @@ img { max-width: 100%; display: block; }
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 570px;
   background: var(--card-bg);
   border-radius: var(--radius);
   overflow: hidden;
