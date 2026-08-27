@@ -24,12 +24,16 @@
       "tagline": "A full body VR rhythm adventure game built around three core pillars: Rhythm, Combat, and Movement.",
       "roles": "Project lead; Dev lead",
       "tags": ["Unreal Engine", "MIDI", "VR"],
-      "thumbnail": "/assets/images/sounds-of-adventure/splash.jpg"
+      "thumbnail": "/assets/projects/games/SOA/images/splash.jpg"
     }
   </script>
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
+    // This project's shorthand folder — see assets/projects/games/SOA/.
+    // Used below so every media path only has the folder written once.
+    const PROJECT_DIR = '/assets/projects/games/SOA';
+
     const project = {
       ...JSON.parse(document.getElementById('card-data').textContent),
       heroMedia: { src: 'https://www.youtube.com/watch?v=17f11ZN7Zdg', type: 'youtube' },
@@ -53,12 +57,12 @@
           blocks: [
             {
               text: `In *Sounds of Adventure*, the player moves through a series of linear levels, bound by a grid system: the 'Level Grid.' To move in this level grid, the player has a virtual D-pad at their feet — think like a Dance Dance Revolution arcade machine — and must step on the correct, virtual arrow button to move one space on the grid, in the direction they stepped.`,
-              media: '/assets/videos/SOA/SoA_DDRPadDemo-Shortened.mp4',
+              media: `${PROJECT_DIR}/videos/SoA_DDRPadDemo-Shortened.mp4`,
               mediaType: 'video',
             },
             {
               text: `We detect when the player steps on the virtual D-pad using three, wearable trackers — one for the waist, and one for each foot. While perhaps a bit misrepresentative, this is often referred to simply as full body tracking (FBT) by the VR community.`,
-              media: '/assets/videos/SOA/SoA_FBTDemo.mp4',
+              media: `${PROJECT_DIR}/videos/SoA_FBTDemo.mp4`,
               mediaType: 'video',
             }
           ],
@@ -71,14 +75,14 @@
                   text: `A significant portion of development time was dedicated to making sure that the full body tracking was seamless. The underlying issue was that not everyone puts the trackers on in exactly the same way, and not everyone is the same height.`,
                 },
                 {
-                  text: `The first solution we came up with was a manual calibration screen, where the player could drag their virtual feet and torso to align with their real body parts. However, in practice we found this was very clunky. 
+                  text: `The first solution we came up with was a manual calibration screen, where the player could drag their virtual feet and torso to align with their real body parts. However, in practice we found this was very clunky.
                   Instead, we opted for an auto calibration system, where, when the game boots, the player's virtual feet and torso line up with preset points, and the distance between the virtual positions and the trackers' real position is automatically calculated, and stored into a game instance, to be used as an offset for each body part.`,
                   media:'https://blueprintue.com/blueprint/gpv72q-m/',
                   mediaType: 'blueprintue',
                 },
                 {
                   text: `Implementing this was initially a problem: the trackers store their position in world space, but the body parts they are attached to (i.e. feet and torso) are stored in the player pawn’s relative space. This is an issue since the auto calculated offset needs to be applied from the body parts relative to the trackers (i.e. the trackers need to be positioned relative to the body parts, but the current coordinate relationship only allowed for the inverse). Thankfully, after doing a bit of research, the solution was very straightforward: we ran the tracker's location through the 'Inverse Transform Location' node, which converted their world-based location into the same relative system as the body parts.`,
-                  media:'/assets/videos/SOA/AutoCalibration.mp4',
+                  media:`${PROJECT_DIR}/videos/AutoCalibration.mp4`,
                   mediaType: 'video',
                 },
               ]
@@ -91,7 +95,7 @@
           blocks: [
             {
               text: `All movement (arms, waist, and feet) must be started on the beat (unmute the clip to the right to get a better sense of this). After calibrating the tracking to be able to tell us when the player was moving, we were able to tell if that movement was on beat using MIDI events, such as when a particular note is played.`,
-              media: '/assets/videos/SOA/SoA_RhythmBasedDemo.mp4',
+              media: `${PROJECT_DIR}/videos/SoA_RhythmBasedDemo.mp4`,
               mediaType: 'video',
               muteToggle: true,
             },
@@ -102,7 +106,7 @@
             },
             {
               text: `These are the earliest tech demos/PoCs for *Sounds of Adventure*; a showcase of actors being driven by MIDI note events, and another PoC designed to show how MIDI events could drive animations, and stay in sync while lots of other things were happening.`,
-              media: '/assets/videos/SOA/LostWoodsBallDemo.mp4',
+              media: `${PROJECT_DIR}/videos/LostWoodsBallDemo.mp4`,
               mediaType: 'video',
               muteToggle: true,
             }
@@ -117,7 +121,7 @@
                 },
                 {
                   text: `This track filtering system was how we were able to 'compose' the enemy movement and attack patterns. Each enemy listened for notes on a track corresponding to its class (e.g. Standard Enemy, Enemy2, Boss, etc.). When it heard an A note, it would advance in its movement pattern — an array of Vector2s with each member being a delta position in ‘grid space’ — and a G note would tell it to advance its attack — each attack had at least 3 'phases:' warning/wind-up, attack, and wind-down.`,
-                  media:'/assets/videos/SOA/EnemMovement.mp4',
+                  media:`${PROJECT_DIR}/videos/EnemMovement.mp4`,
                   mediaType: 'video',
                 },
                 {
@@ -135,12 +139,12 @@
           blocks: [
             {
               text: `"The 'timing descriptors' (Perfect, Nice, Ok, Bad, etc.) are used to determine the player's combo, which is in turn used to determine how much damage the player deals; the combo acts as a multiplier for the damage done by a player's weapons.`,
-              media: '/assets/videos/SOA/SoA_ComboDemo.mp4',
+              media: `${PROJECT_DIR}/videos/SoA_ComboDemo.mp4`,
               mediaType: 'video',
             },
             {
               text: `There are three classes of weapons: big weapons, small weapons, and shields. The player starts with one of each: The Royal Shield, The Longsword, and The Claymore. As players progress through the game and defeat the boss of each level, they unlock that level's special weapon. Once unlocked, the weapon will appear in the HUB/Main Menu room for the player to equip, and bring into any level they would like.`,
-              media: '/assets/videos/SOA/SoA_HUBDemo.mp4',
+              media: `${PROJECT_DIR}/videos/SoA_HUBDemo.mp4`,
               mediaType: 'video',
             }
           ]

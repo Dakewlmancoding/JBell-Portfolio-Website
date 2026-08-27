@@ -4,8 +4,11 @@
   ║  To write up a new project:                               ║
   ║  1. Copy this file into projects/<category>/ and rename   ║
   ║     it (e.g. projects/games/zen-dwarves.html)              ║
-  ║  2. Put its media in assets/images/<project-slug>/ and    ║
-  ║     assets/videos/<project-slug>/                          ║
+  ║  2. Pick a short, unique shorthand for the project (e.g.  ║
+  ║     "SOA", "SBVR" — no formula, just make one up) and       ║
+  ║     create assets/projects/<category>/<SHORTHAND>/, with  ║
+  ║     images/ and videos/ (and audio/, if needed) inside.    ║
+  ║     Set PROJECT_DIR below to that folder's path.            ║
   ║  3. Fill in the `card-data` JSON block AND the `project`  ║
   ║     object below — no HTML/CSS to write. Everything is    ║
   ║     rendered by renderProjectPage() in components.js.      ║
@@ -51,12 +54,16 @@
       "tagline": "One or two sentences describing the project.",
       "roles": "Your role(s) on the project",
       "tags": ["Unreal Engine", "VR"],
-      "thumbnail": "/assets/images/project-slug/splash.jpg"
+      "thumbnail": "/assets/projects/category/SHORTHAND/images/splash.jpg"
     }
   </script>
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
+    // This project's shorthand folder — see step 2 above. Used below so
+    // every media path only has the folder written once.
+    const PROJECT_DIR = '/assets/projects/category/SHORTHAND';
+
     const card = JSON.parse(document.getElementById('card-data').textContent);
     const project = {
       ...card,
@@ -68,7 +75,7 @@
       // background clip instead (the opposite of a body block's defaults).
       // A 'youtube' hero is always just a plain embed (see mediaType note
       // below — YouTube's own UI can't reliably be stripped down).
-      heroMedia: { src: '/assets/images/project-slug/splash.jpg', type: 'image' },
+      heroMedia: { src: `${PROJECT_DIR}/images/splash.jpg`, type: 'image' },
 
       // Optional — delete this key if the project has no team to credit.
       credits: [
@@ -101,7 +108,7 @@ Second paragraph — each line becomes its own <p>. Supports *italics*,
 **bold**, and [link text](https://example.com).`,
               // Omit `media` entirely for a plain, centered text block,
               // or omit `text` entirely for a plain, centered media block.
-              media: '/assets/images/project-slug/splash.jpg',
+              media: `${PROJECT_DIR}/images/splash.jpg`,
               // 'image' (default) | 'video' (local .mp4/.webm) | 'audio'
               // (local .mp3/.wav/etc. — just a speaker button, never plays
               // by default) | 'youtube' | 'gdrive' | 'blueprintue' — for
