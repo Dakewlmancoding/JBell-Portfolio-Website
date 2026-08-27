@@ -13,7 +13,8 @@
 const PROJECT_INDEX = {
   games: [
     '/projects/games/sounds-of-adventure.html',
-    '/projects/games/sushi-ben.html'
+    '/projects/games/sushi-ben.html',
+    '/projects/games/water-wings.html',
   ],
   tools: [],
   misc: [
