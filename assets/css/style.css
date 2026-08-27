@@ -61,6 +61,8 @@ img { max-width: 100%; display: block; }
 
 /* ---------- PAGE SHELL ---------- */
 .page-shell {
+  display: flex;
+  flex-direction: column;
   max-width: 1400px;
   margin: 0 auto;
   background: var(--shell-bg);
@@ -73,6 +75,13 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 100;
+  flex-shrink: 0;
+}
+
+/* Pushes the footer to the bottom of the viewport when the page's own
+   content is shorter than the screen, without touching any page's HTML. */
+#site-footer {
+  margin-top: auto;
 }
 
 #site-nav-inner {
