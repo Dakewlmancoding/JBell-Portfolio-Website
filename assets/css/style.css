@@ -424,6 +424,19 @@ img { max-width: 100%; display: block; }
 }
 .text-block p:last-child { margin-bottom: 0; }
 
+/* A text-media block with no text — plain, centered media. */
+.media-block {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+
+.media-block img, .media-block video {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
 /* ---------- PROJECT DETAIL PAGE ---------- */
 .project-hero {
   padding: 3.5rem 3rem 2.5rem;
@@ -543,7 +556,8 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.5rem;
 }
 
-.content-section .text-media { padding: 1.5rem 0; }
+.content-section .text-media,
+.content-section .media-block { padding: 1.5rem 0; }
 
 .back-to-top {
   display: block;
@@ -634,7 +648,8 @@ img { max-width: 100%; display: block; }
 
 .subsection-body { padding-bottom: 1.25rem; }
 .subsection-body .text-media,
-.subsection-body .text-block { padding: 1rem 0; }
+.subsection-body .text-block,
+.subsection-body .media-block { padding: 1rem 0; }
 
 /* ---------- GENERIC PAGE CONTENT (stub pages) ---------- */
 .page-content {

@@ -182,6 +182,7 @@ function parseMarkdown(text) {
 // ---------- TEXT + MEDIA BLOCK ----------
 // text:      multiline string — each line becomes its own paragraph.
 //            Supports *italics*, **bold**, and [link text](url).
+//            Optional; omit it entirely for a plain, centered media block.
 // media:     path/URL to the image, video, or embed (see mediaTag above) —
 //            optional; omit it entirely for a plain, centered text block
 // mediaType:    'image' (default) | 'video' | 'youtube' | 'gdrive' | 'blueprintue'
@@ -193,9 +194,14 @@ function parseMarkdown(text) {
 //               get a normal, watch-it-yourself player. ('youtube' is
 //               always just a plain embed — see mediaTag for why.)
 // reverse:      false = text left / media right, true = media left / text right
-//               (ignored when there's no media). You won't normally set this
-//               by hand — renderBlocks() below assigns it automatically.
+//               (ignored when text or media is missing). You won't normally
+//               set this by hand — renderBlocks() below assigns it automatically.
 function textMediaBlock({ text, media, mediaType = 'image', muteToggle, hideControls, autoplay, loop, muted, reverse = false }) {
+  if (!text) {
+    if (!media) return '';
+    return `<div class="media-block">${mediaTag(media, mediaType, { muteToggle, hideControls, autoplay, loop, muted })}</div>`;
+  }
+
   const paragraphs = text.trim().split('\n').map((line) => `<p>${parseMarkdown(line)}</p>`).join('');
 
   if (!media) {
@@ -213,14 +219,15 @@ function textMediaBlock({ text, media, mediaType = 'image', muteToggle, hideCont
 // Renders a list of blocks (a section's, a subsection's, or the page
 // intro's), automatically alternating which side the media lands on —
 // first media block is text-left/media-right, the next is flipped, and
-// so on. Text-only blocks (no `media`) are skipped for this count (they
-// always render centered anyway) so they don't throw off the pattern.
-// Each call starts its own fresh left/right count — a section and its
-// subsections each alternate independently, not as one shared sequence.
+// so on. Text-only and media-only blocks (missing either `text` or
+// `media`) are skipped for this count (they always render centered
+// anyway) so they don't throw off the pattern. Each call starts its own
+// fresh left/right count — a section and its subsections each alternate
+// independently, not as one shared sequence.
 function renderBlocks(blocks = []) {
   let mediaCount = 0;
   return blocks.map((block) => {
-    if (!block.media) return textMediaBlock(block);
+    if (!block.media || !block.text) return textMediaBlock(block);
     const reverse = mediaCount % 2 === 1;
     mediaCount++;
     return textMediaBlock({ ...block, reverse });
