@@ -20,7 +20,7 @@ function highlightActiveNav() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadInclude('site-nav', 'includes/nav.html');
+  await loadInclude('site-nav', '/includes/nav.html');
   highlightActiveNav();
-  loadInclude('site-footer', 'includes/footer.html');
+  loadInclude('site-footer', '/includes/footer.html');
 });

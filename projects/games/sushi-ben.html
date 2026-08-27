@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sushi Ben — Jack Bell</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body data-page="games">
   <div class="page-shell">
@@ -15,8 +15,8 @@
     <div id="site-footer"></div>
   </div>
 
-  <script src="assets/js/include.js"></script>
-  <script src="assets/js/components.js"></script>
+  <script src="/assets/js/include.js"></script>
+  <script src="/assets/js/components.js"></script>
   <script>
     const project = {
       title: 'Sushi Ben',
@@ -30,7 +30,7 @@
         }
       ],
       tags: ['Unreal Engine', 'Niagara', 'VR'],
-      heroMedia: { src: 'assets/images/sushi-ben/splash.jpg', type: 'image' },
+      heroMedia: { src: '/assets/images/sushi-ben/splash.jpg', type: 'image' },
       sections: [
         {
           id: 'general-polish',
@@ -38,12 +38,12 @@
           blocks: [
             {
               text: `When I was first brought on, a lot of the work I did involved the [Flow system](https://github.com/MothCocoon/FlowGraph): a plugin that allows for easier development of quests/narrative structures via custom nodes and a custom graph. I highly recommend checking it out! I’ve used it in several of my own projects since learning about it. My work with it on Sushi Ben was mostly just making sure events triggered in the right order: the player takes their first bite of sushi before the NPC they’re dining with does, or making sure it’s the right time of day when a quest starts. `,
-              media: 'assets/videos/SBVR/GEN-WaitToEat.mp4',
+              media: '/assets/videos/SBVR/GEN-WaitToEat.mp4',
               mediaType: 'video',
             },
             {
               text: `As I got more acclimated to the project’s architecture, I began working with more of the actual blueprinting. My initial work here was more bugfixing and polishing, primarily involving the game’s companion character, Maru, and making sure his ‘special states’ (like being a statue and being stuck to a tentacle) worked correctly in the game’s Flat mode.`,
-              media: 'assets/videos/SBVR/GEN-MaruClean.mp4',
+              media: '/assets/videos/SBVR/GEN-MaruClean.mp4',
               mediaType: 'video',
             }
           ]
@@ -54,32 +54,32 @@
           blocks: [
             {
               text: `Thanks to my prior experience working with Unreal and VR, I became fully acclimated to the project's code base very quickly.  I was then asked to take on more complicated projects, chief among them being the flagship Table Tennis minigame. When I began working on it, no progress had been made porting Table Tennis to Flat and the minigame could only be played in VR.`,
-              media: 'assets/videos/SBVR/PP-OGGame.mp4',
+              media: '/assets/videos/SBVR/PP-OGGame.mp4',
               mediaType: 'video',
             },
             {
               text: `In VR, the opponent could hit the ball anywhere on your side of the table. To hit the ball back, the player physically swings their paddle at the ball and the ball’s speed is determined by the velocity of the swing. Interestingly, the ball’s speed initially had no gameplay effect. The only thing that influences the opponent’s chance to miss is when you hit the ball; any hit made when the ball is 90% of the way to its target on your side `,
-              media: 'assets/videos/SBVR/PP-BallSpeed.mp4',
+              media: '/assets/videos/SBVR/PP-BallSpeed.mp4',
               mediaType: 'video',
             },
             {
               text: `The initial port of table tennis to flat was very 1 to 1 with this idea: you moved the paddle on a 2D plane and tried to align the paddle with where the ball was going to end up. This proved fairly challenging and not very engaging. This led to an idea of the paddle locking its height to the ball’s height when the ball was close enough to the paddle.`,
-              media: 'assets/videos/SBVR/PP-2DPlane.mp4',
+              media: '/assets/videos/SBVR/PP-2DPlane.mp4',
               mediaType: 'video',
             },
             {
               text: `Eventually, this ‘lock-on’ idea evolved into the final, Flat version: the paddle snaps between left, middle, and right. In Flat, the ball can only go to one of these three positions. The challenge of this implementation was making sure none of the new Flat mechanics broke existing VR mechanics, as both systems needed to coexist in the same blueprints, due to the game’s architecture.`,
-              media: 'assets/videos/SBVR/PP-Snap.mp4',
+              media: '/assets/videos/SBVR/PP-Snap.mp4',
               mediaType: 'video',
             },
             {
               text: `Along the way, I was also able to make some creative decisions, through adding additional mechanics to make the game more interesting. The first of these is the spin system. On harder difficulties, the opponents can add back spin to the ball, causing it to go in a different direction than it first appears.`,
-              media: 'assets/videos/SBVR/PP-BallSpin.mp4',
+              media: '/assets/videos/SBVR/PP-BallSpin.mp4',
               mediaType: 'video',
             },
             {
               text: `The other mechanic I added is the Super Smash system. This is where characters use their special moves (like Aika and her baseball bat, or Taka with his multiball technique) in response to the player failing to hit the ball, and letting the ball just bounce off their stationary paddle.`,
-              media: 'assets/videos/SBVR/PP-SuperSmash.mp4',
+              media: '/assets/videos/SBVR/PP-SuperSmash.mp4',
               mediaType: 'video',
             }
           ]

@@ -24,7 +24,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Title — Jack Bell</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body data-page="games">
   <div class="page-shell">
@@ -35,8 +35,8 @@
     <div id="site-footer"></div>
   </div>
 
-  <script src="assets/js/include.js"></script>
-  <script src="assets/js/components.js"></script>
+  <script src="/assets/js/include.js"></script>
+  <script src="/assets/js/components.js"></script>
   <script>
     const project = {
       title: 'Project Title',
@@ -51,7 +51,7 @@
       // background clip instead (the opposite of a body block's defaults).
       // A 'youtube' hero is always just a plain embed (see mediaType note
       // below — YouTube's own UI can't reliably be stripped down).
-      heroMedia: { src: 'assets/images/project-slug/splash.jpg', type: 'image' },
+      heroMedia: { src: '/assets/images/project-slug/splash.jpg', type: 'image' },
 
       // Optional — delete this key if the project has no team to credit.
       credits: [
@@ -83,7 +83,7 @@
 Second paragraph — each line becomes its own <p>. Supports *italics*,
 **bold**, and [link text](https://example.com).`,
               // Omit `media` entirely for a plain, centered text block.
-              media: 'assets/images/project-slug/splash.jpg',
+              media: '/assets/images/project-slug/splash.jpg',
               // 'image' (default) | 'video' (local .mp4/.webm) | 'youtube'
               // | 'gdrive' | 'blueprintue' — for the embed types, just
               // paste the normal URL you'd copy from that site. 'youtube'
