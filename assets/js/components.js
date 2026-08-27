@@ -133,39 +133,62 @@ function videoTag(media, { muteToggle = false, hideControls = true, autoplay = t
   `;
 }
 
-// Wired to the button's onclick — finds its paired <audio> and toggles
-// play/pause, swapping the icon and label to match.
+// ---------- AUDIO PLAYER ----------
+// Icons for the play/pause button (see audioTag below).
+const AUDIO_ICON_PLAY = `<svg viewBox="0 0 24 24" width="18" height="18"><path d="M7 4l13 8-13 8V4z" fill="currentColor"/></svg>`;
+const AUDIO_ICON_PAUSE = `<svg viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></svg>`;
+
+// Wired to the button's onclick — finds its paired <audio> (via the
+// shared .audio-wrap, not sibling order, so markup can't drift out of
+// sync) and toggles play/pause, swapping the icon and label to match.
 function toggleAudioPlay(button) {
-  const audio = button.previousElementSibling;
+  const audio = button.closest('.audio-wrap').querySelector('audio');
   if (audio.paused) {
     audio.play();
-    button.innerHTML = MUTE_ICON_UNMUTED;
+    button.innerHTML = AUDIO_ICON_PAUSE;
     button.setAttribute('aria-label', 'Pause audio');
   } else {
     audio.pause();
-    button.innerHTML = MUTE_ICON_MUTED;
+    button.innerHTML = AUDIO_ICON_PLAY;
     button.setAttribute('aria-label', 'Play audio');
   }
 }
 
-// If the clip finishes on its own (no loop), reset the button back to
-// its "play" state instead of leaving it stuck showing "playing".
-function resetAudioButton(audio) {
-  const button = audio.nextElementSibling;
-  button.innerHTML = MUTE_ICON_MUTED;
-  button.setAttribute('aria-label', 'Play audio');
+// Wired to the seek slider's oninput — jumps playback to wherever the
+// viewer clicked/dragged to (a plain <input type="range"> handles the
+// actual click-and-drag interaction natively).
+function seekAudio(input) {
+  const audio = input.closest('.audio-wrap').querySelector('audio');
+  if (!isNaN(audio.duration)) {
+    audio.currentTime = (input.value / 100) * audio.duration;
+  }
 }
 
-// A local audio file. Never plays by default — just the same speaker
-// button used for video mute-toggling, except here it's the only visual
-// (no video frame to overlay), so it's always visible rather than
-// hover-to-reveal, and clicking it starts/stops playback instead of
-// muting/unmuting.
+// Wired to the <audio>'s ontimeupdate — keeps the slider in sync with
+// playback as it progresses.
+function updateAudioProgress(audio) {
+  if (!audio.duration) return;
+  audio.closest('.audio-wrap').querySelector('.audio-seek').value = (audio.currentTime / audio.duration) * 100;
+}
+
+// If the clip finishes on its own, reset the button and slider back to
+// their starting state instead of leaving them stuck mid-track.
+function resetAudioButton(audio) {
+  const wrap = audio.closest('.audio-wrap');
+  const button = wrap.querySelector('.audio-toggle');
+  button.innerHTML = AUDIO_ICON_PLAY;
+  button.setAttribute('aria-label', 'Play audio');
+  wrap.querySelector('.audio-seek').value = 0;
+}
+
+// A local audio file. Never plays by default — a play/pause button plus
+// a seek slider the viewer can click or drag to jump around the track.
 function audioTag(media) {
   return `
     <div class="audio-wrap">
-      <audio src="${media}" onended="resetAudioButton(this)"></audio>
-      <button type="button" class="mute-toggle audio-toggle" aria-label="Play audio" onclick="toggleAudioPlay(this)">${MUTE_ICON_MUTED}</button>
+      <audio src="${media}" ontimeupdate="updateAudioProgress(this)" onended="resetAudioButton(this)"></audio>
+      <button type="button" class="audio-toggle" aria-label="Play audio" onclick="toggleAudioPlay(this)">${AUDIO_ICON_PLAY}</button>
+      <input type="range" class="audio-seek" min="0" max="100" value="0" step="0.1" oninput="seekAudio(this)" aria-label="Seek audio" />
     </div>
   `;
 }

@@ -52,7 +52,7 @@
     {
       "title": "Water Wings",
       "tagline": "A calming VR experience for hospice patients",
-      "roles": "Programmer & Composer",
+      "roles": "Sole Programmer; Composer",
       "tags": ["Unreal Engine", "VR"],
       "thumbnail": "/assets/projects/games/WW/images/splash.png"
     }
@@ -79,7 +79,9 @@
 
       // Optional — delete this key if the project has no team to credit.
       credits: [
-        { role: 'Role', name: 'Name' }
+        { role: 'Programmer & Composer', name: 'Jack Bell (Yours Truly)' },
+        { role: 'Artists (Models, Environment, Caustics)', name: 'Jenna Bresky, Katie Stevens, Rowan Bruton' },
+        { role: 'Additional Caustics', name: 'Michael Cormican' },
       ],
 
       // Optional — shown between the credits table and the section
@@ -87,7 +89,7 @@
       // Delete this key if the project doesn't need an intro blurb.
       intro: [
         {
-          text: `A short intro paragraph, shown before the reader jumps into any one section.`
+          text: `In 10 weeks, our team of five created Water Wings: A VR experience intended for patients at a local Savannah hospice center, in collaboration with the Savannah College of Art and Design. I served as the sole programmer and composer. The experience was created with purposefully simple mechanics to be accessible to this demographic: older patients who might not have much mobility or gaming experience. We hoped to bring patients a reprieve from anxiety and pain by instilling them with a child-like sense of awe and wonder through a calming and beautiful experience tailored to their needs.`
           // No `media` key at all -> renders as plain, centered text
           // instead of the usual side-by-side text+media layout.
         }
@@ -103,50 +105,128 @@
           heading: 'Overview',
           blocks: [                    // one or more text+media rows, top to bottom
             {
-              text: `First paragraph.
-Second paragraph — each line becomes its own <p>. Supports *italics*,
-**bold**, and [link text](https://example.com).`,
-              // Omit `media` entirely for a plain, centered text block,
-              // or omit `text` entirely for a plain, centered media block.
+              text: `The game features a tour of an ancient underwater city, from the back of a magical manta ray — fittingly named Manta. Players stop at various key destinations to find and collect magical rune stones hidden somewhere in the scenery. Players must focus their gaze on a rune stone for 10 seconds to collect it, at which point Manta takes the player to the next vignette. At the end of their journey, all the collected stones come together, raising a tower from beneath the sand, and sending it spiraling up towards the sky. The Manta and the player spiral up with it, letting them take to the sky and fly among the clouds to end the experience.`,
               media: `${PROJECT_DIR}/images/splash.png`,
-              // 'image' (default) | 'video' (local .mp4/.webm) | 'audio'
-              // (local .mp3/.wav/etc. — just a speaker button, never plays
-              // by default) | 'youtube' | 'gdrive' | 'blueprintue' — for
-              // the embed types, just paste the normal URL you'd copy
-              // from that site. 'youtube' is always a plain, normal embed
-              // (controls and all) — YouTube doesn't give a reliable way
-              // to strip its UI down, so muteToggle/hideControls/autoplay/
-              // loop/muted below only do anything for 'video'.
               mediaType: 'image',
-              // 'video' only — false (default) is a silent looping clip;
-              // true adds a hover-to-reveal speaker button so the viewer
-              // can turn sound on/off.
               muteToggle: false,
-              // 'video' only — true (default) hides the native video
-              // controls; set false to show them.
               hideControls: true
-              // No `reverse` key needed — renderBlocks() alternates the
-              // media side automatically (text-only blocks don't count).
-            }
-          ],
-
-          // Optional — for deeper technical breakdowns that shouldn't
-          // clutter the general write-up. Rendered collapsed by default
-          // (click to expand), and NOT included in the jump-nav. Delete
-          // this key entirely if a section has no subsections.
-          subsections: [
+            },
             {
-              id: 'overview-deep-dive',
-              heading: 'How It Actually Works',
-              blocks: [
-                {
-                  text: `The technical details go here.`,
-                  media: 'https://www.youtube.com/watch?v=XXXXXXXXXXX',
-                  mediaType: 'youtube'
-                }
-              ]
-            }
-          ]
+              text: `We utilised gaze-based tracking so patients could practice using some gentle motor skills (head tilting/rotating to find stones and look around the environment).
+The game is best played sitting or lying down, since participants in the experience ride atop Manta. There is no joystick-based movement nor physical activity.
+This did cause us to have some concerns about player agency, not wanting anyone to feel “stuck,” alarmed by being unable to move in VR, or even like they were drowning. We solved this by emphasising the magical and stylised tone of our environment through the game’s art as well as its sound and score.
+`,
+              media: `${PROJECT_DIR}/videos/gazedBased.mp4`,
+              mediaType: 'video',
+              muteToggle: false,
+              hideControls: true
+            },
+          ],
+        },
+        {
+          id: 'sound',              // used for the #anchor and jump-nav link
+          heading: 'Sound Design',
+          blocks: [                    // one or more text+media rows, top to bottom
+            {
+              text: `To help emphasise the fantastical mood, the game has no traditional sound effects. Instead, everything is represented by music. I wrote a 16-part score, with different parts representing different assets in the game, inspired by works like *Peter and the Wolf*.`,
+            },
+            {
+              text: `The main score, on the harp and celesta, plays throughout the experience, while the rest of the parts are spatialised and follow the asset they represent.`,
+              media: `${PROJECT_DIR}/audio/mainScore.wav`,
+              mediaType: 'audio',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `When the player is taken by various schools of fish, they hear different woodwind sections, playing in time with the rest of the score, but spatialised to sound like they are coming from the fish themselves.`,
+              media: `${PROJECT_DIR}/audio/bigFishA.wav`,
+              mediaType: 'audio',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `“Hero parts” are tied to each key destination, and so are meant to stand out more than the other parts. This is done by either playing with the rhythmic structure of the score (such as stricter ¾ timing being used by the ballroom to create a waltz feel), or by using an instrument that stands out against the main score (such as the trumpet for the eagle statue).`,
+              media: `${PROJECT_DIR}/audio/ballroom.wav`,
+              mediaType: 'audio',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `“Rune Parts” are the only pieces of the score based on a counter melody, rather than a normal harmony, since they needed to stand out the most. They also use very unique instrumentation: a synth for the rune stone’s part and a women’s choir for the rune spire.`,
+              media: `${PROJECT_DIR}/audio/runeStone.wav`,
+              mediaType: 'audio',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `The entire 16-part score comes together to sound like this, although players will never hear it in full like this, due to the spatialisation.`,
+              media: `${PROJECT_DIR}/audio/fullScore.wav`,
+              mediaType: 'audio',
+              muteToggle: false,
+              hideControls: true
+            },
+          ],
+        },
+        {
+          id: 'game-loop',              // used for the #anchor and jump-nav link
+          heading: 'Gameplay Loop',
+          blocks: [                    // one or more text+media rows, top to bottom
+            {
+              media: `${PROJECT_DIR}/images/gameLoop.png`,
+              mediaType: 'image',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `Intro Cutscene
+At the start of the game a cutscene plays, introducing Manta and Bubbles. Bubbles then explains the game to the player.`,
+            },
+            {
+              text: `1-Gaze-Based: Player gets on Manta
+Once the player has finished progressing through an area by finding its Rune Stone, they look at the Manta the manta ray, causing him to slowly move to the player.`,
+              media: `${PROJECT_DIR}/videos/getOnManta.mp4`,
+              mediaType: 'video',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `2-Dynamic Path Travel System
+Once Manta has moved to be under the player, he and the player move slowly along a set path to the next scene. This gives the player plenty of time to look around and enjoy the scenery.`,
+              media: `${PROJECT_DIR}/videos/pathTravelling.mp4`,
+              mediaType: 'video',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `3-Automatically Dismounting Manta
+Once Manta reaches the next stop at the end of its path, it moves down to the ground and places the player down. When the player has stopped moving, Manta will move away from the player, giving them an uninterrupted view of their surroundings, and Manta begins a looping animation, circling the current zone.`,
+              media: `${PROJECT_DIR}/videos/autoDismount.mp4`,
+              mediaType: 'video',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `4-Gaze-based Rune Discovery System
+Each zone has a single rune stone for players to look around and find. Once the player finds the rune stone and looks at it long enough, the rune will gradually move towards the player. Once it arrives at the player, it will be ‘collected’ (represented by the rune now appearing on Manta) and the player can mount Manta again to repeat the loop in a new area.`,
+              media: `${PROJECT_DIR}/videos/runeCollection.mp4`,
+              mediaType: 'video',
+              muteToggle: false,
+              hideControls: true
+            },
+            {
+              text: `Final Cutscene
+After the last zone, the final cutscene plays. Manta and the player follow a rising tower out of the ocean and fly into the sky, ending the experience.`,
+            },
+          ],
+        },
+        {
+          id: 'programming-philosophy',              // used for the #anchor and jump-nav link
+          heading: 'Programming Philosophy: Dynamic Systems',
+          blocks: [                    // one or more text+media rows, top to bottom
+            {
+              text: `When programming the game on such a short timeline, my philosophy was to keep everything as dynamic as possible. With a small team and a short timeline, our game’s scope was unstable. Every system in the gameplay loop was coded to be as adaptable as possible on short notice. Each zone lived in an easily expandable array. The first stop automatically iterated from the introduction cutscene, and the last stop automatically iterated into the final cutscene.  Each zone stop was a blueprint with dynamic variables for: the spline Manta took to get to the zone; the transform of the stop’s rune stone; and the texture/mesh for the stop’s rune stone.  This all meant adding a new zone was as easy as dragging in a new stop, creating a path to this stop from the last stop with a spline, setting the Runestone visuals, setting the runestone location/rotation/scale, and adding it to the master array.`,
+            },
+          ],
         }
         // Add as many sections (and subsections) as the project needs.
       ]
