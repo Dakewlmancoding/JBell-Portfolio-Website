@@ -15,13 +15,23 @@
     <div id="site-footer"></div>
   </div>
 
+  <!-- Read by games.html/tools.html/misc.html to build this project's
+       card without running any of the JS below or loading its media —
+       keep this in sync with title/tagline/roles/tags if you change them. -->
+  <script type="application/json" id="card-data">
+    {
+      "title": "Sushi Ben",
+      "tagline": "An anime-inspired \"slice of life\" game about arriving in a new town and helping save a local sushi restaurant.",
+      "roles": "Gameplay Engineer; Minigame Designer",
+      "tags": ["Unreal Engine", "Niagara", "VR"],
+      "thumbnail": "/assets/images/sushi-ben/splash.jpg"
+    }
+  </script>
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
     const project = {
-      title: 'Sushi Ben',
-      tagline: 'An anime-inspired "slice of life" game about arriving in a new town and helping save a local sushi restaurant.',
-      roles: 'Gameplay Engineer; Minigame Designer',
+      ...JSON.parse(document.getElementById('card-data').textContent),
       intro: [
         {
         text: `Sushi Ben is an anime-inspired ‘slice of life’ game about arriving in a new town, and helping save a sushi restaurant from land sharks. The game can be played in two modes: VR and “Flat” (non-VR for PC and Console). This greatly added to its backend complexity. I met the game’s creator while finishing up my degree and, upon graduating, joined the team to help see the game to its release. 
@@ -29,7 +39,6 @@
         I stayed on for a few months post-release to help the team patch bugs and softlocks.`
         }
       ],
-      tags: ['Unreal Engine', 'Niagara', 'VR'],
       heroMedia: { src: '/assets/images/sushi-ben/splash.jpg', type: 'image' },
       sections: [
         {

@@ -15,14 +15,23 @@
     <div id="site-footer"></div>
   </div>
 
+  <!-- Read by games.html/tools.html/misc.html to build this project's
+       card without running any of the JS below or loading its media —
+       keep this in sync with title/tagline/roles/tags if you change them. -->
+  <script type="application/json" id="card-data">
+    {
+      "title": "Sounds Of Adventure",
+      "tagline": "A full body VR rhythm adventure game built around three core pillars: Rhythm, Combat, and Movement.",
+      "roles": "Project lead; Dev lead",
+      "tags": ["Unreal Engine", "MIDI", "VR"],
+      "thumbnail": "/assets/images/sounds-of-adventure/splash.jpg"
+    }
+  </script>
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
     const project = {
-      title: 'Sounds Of Adventure',
-      tagline: 'A full body VR rhythm adventure game built around three core pillars: Rhythm, Combat, and Movement.',
-      roles: 'Project lead; Dev lead',
-      tags: ['Unreal Engine', 'MIDI', 'VR'],
+      ...JSON.parse(document.getElementById('card-data').textContent),
       heroMedia: { src: 'https://www.youtube.com/watch?v=17f11ZN7Zdg', type: 'youtube' },
       credits: [
         { role: 'Project Lead / Tech Lead', name: 'Jack Bell (yours truly)' },

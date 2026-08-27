@@ -225,6 +225,13 @@ img { max-width: 100%; display: block; }
   padding: 0 3rem 4rem;
 }
 
+.project-grid-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem 0;
+}
+
 .project-card {
   position: relative;
   display: flex;

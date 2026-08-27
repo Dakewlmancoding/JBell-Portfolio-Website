@@ -35,32 +35,16 @@
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
-    document.getElementById('featured-projects').innerHTML = [
-      projectCard({
-        image: '/assets/images/sounds-of-adventure/splash.jpg',
-        title: 'Sounds Of Adventure',
-        roles: 'Project lead; Dev lead',
-        description: 'A full body VR rhythm adventure game.',
-        tags: ['Unreal Engine', 'MIDI', 'VR'],
-        href: '/projects/games/sounds-of-adventure.html'
-      }),
-      projectCard({
-        image: '/assets/images/sushi-ben/splash.jpg',
-        title: 'Sushi Ben',
-        roles: 'Gameplay Engineer; Minigame Designer',
-        description: 'VR and Non-VR anime-inspired, slice of life game.',
-        tags: ['Unreal Engine', 'Niagara', 'VR'],
-        href: '/projects/games/sushi-ben.html'
-      }),
-      projectCard({
-        image: '/assets/images/arcane-melodies/splash.jpg',
-        title: 'Arcane Melodies',
-        roles: 'Project lead; Dev lead',
-        description: 'A short film showcasing the ability to have a live musical performance drive an XR stage environment.',
-        tags: ['Unreal Engine', 'MIDI', 'XR Stage'],
-        href: '/projects/misc/arcane-melodies.html'
-      })
-    ].join('');
+    // Featured is a hand-picked subset (unlike games.html/tools.html/misc.html,
+    // which show every project in their category) — but the card content
+    // itself still comes live from each project's own page, same as those.
+    Promise.all([
+      fetchProjectCard('/projects/games/sounds-of-adventure.html'),
+      fetchProjectCard('/projects/games/sushi-ben.html'),
+      fetchProjectCard('/projects/misc/arcane-melodies.html')
+    ]).then((cards) => {
+      document.getElementById('featured-projects').innerHTML = cards.filter(Boolean).join('');
+    });
   </script>
 </body>
 </html>

@@ -10,9 +10,9 @@
   <div class="page-shell">
     <div id="site-nav"></div>
 
-    <section class="page-content">
-      <h1>Misc</h1>
-      <p>This page is coming soon.</p>
+    <section>
+      <h2 class="section-heading">Misc</h2>
+      <div class="project-grid" id="category-projects"></div>
     </section>
 
     <div id="site-footer"></div>
@@ -20,5 +20,9 @@
 
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/project-index.js"></script>
+  <script>
+    loadCategoryCards('misc', 'category-projects');
+  </script>
 </body>
 </html>

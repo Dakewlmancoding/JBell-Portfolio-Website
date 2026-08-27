@@ -15,14 +15,23 @@
     <div id="site-footer"></div>
   </div>
 
+  <!-- Read by games.html/tools.html/misc.html to build this project's
+       card without running any of the JS below or loading its media —
+       keep this in sync with title/tagline/roles/tags if you change them. -->
+  <script type="application/json" id="card-data">
+    {
+      "title": "Arcane Melodies",
+      "tagline": "A short film showcasing the ability to have a live musical performance drive an XR stage environment.",
+      "roles": "Project lead; Dev lead",
+      "tags": ["Unreal Engine", "MIDI", "XR Stage"],
+      "thumbnail": "/assets/images/arcane-melodies/splash.jpg"
+    }
+  </script>
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
     const project = {
-      title: 'Arcane Melodies',
-      tagline: 'A short film showcasing the ability to have a live musical performance drive an XR stage environment.',
-      roles: 'Project lead; Dev lead',
-      tags: ['Unreal Engine', 'MIDI', 'XR Stage'],
+      ...JSON.parse(document.getElementById('card-data').textContent),
       heroMedia: { src: 'https://drive.google.com/file/d/1MO1zy0ATSfjqaVKE_SapN5dMCJzyRuyT/view', type: 'gdrive' },
       sections: [
         {

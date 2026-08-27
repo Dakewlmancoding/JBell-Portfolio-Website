@@ -10,9 +10,9 @@
   <div class="page-shell">
     <div id="site-nav"></div>
 
-    <section class="page-content">
-      <h1>Games</h1>
-      <p>The full project list is coming soon — for now, check the featured projects on the Home page.</p>
+    <section>
+      <h2 class="section-heading">Games</h2>
+      <div class="project-grid" id="category-projects"></div>
     </section>
 
     <div id="site-footer"></div>
@@ -20,5 +20,9 @@
 
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/project-index.js"></script>
+  <script>
+    loadCategoryCards('games', 'category-projects');
+  </script>
 </body>
 </html>

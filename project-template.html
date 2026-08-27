@@ -2,20 +2,24 @@
   ╔══════════════════════════════════════════════════════════╗
   ║  PROJECT PAGE TEMPLATE                                    ║
   ║  To write up a new project:                               ║
-  ║  1. Copy this file and rename it (e.g. zen-dwarves.html)  ║
+  ║  1. Copy this file into projects/<category>/ and rename   ║
+  ║     it (e.g. projects/games/zen-dwarves.html)              ║
   ║  2. Put its media in assets/images/<project-slug>/ and    ║
   ║     assets/videos/<project-slug>/                          ║
-  ║  3. Fill in the `project` object below — no HTML/CSS to   ║
-  ║     write. Everything is rendered by renderProjectPage()  ║
-  ║     in assets/js/components.js.                            ║
-  ║  4. Add a projectCard({...}) call for it on index.html    ║
-  ║     (or games.html) linking to this file.                 ║
+  ║  3. Fill in the `card-data` JSON block AND the `project`  ║
+  ║     object below — no HTML/CSS to write. Everything is    ║
+  ║     rendered by renderProjectPage() in components.js.      ║
+  ║  4. Add this file's path to assets/js/project-index.js —  ║
+  ║     that's what makes it show up on games.html/tools.html/║
+  ║     misc.html automatically. (Nothing to add for the Home  ║
+  ║     page's Featured section — that's a hand-picked list    ║
+  ║     of specific projects, edited directly in index.html.)  ║
   ║                                                             ║
   ║  Section jump-links and "Back to top" are generated        ║
   ║  automatically from the sections you list — you don't      ║
   ║  need to build navigation by hand.                          ║
-  ║  `credits` and `heroMedia` are both optional — delete       ║
-  ║  them if a project doesn't need one.                        ║
+  ║  `credits`, `heroMedia`, and `intro` are all optional —     ║
+  ║  delete them if a project doesn't need one.                 ║
   ╚══════════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
@@ -35,14 +39,27 @@
     <div id="site-footer"></div>
   </div>
 
+  <!-- Read by games.html/tools.html/misc.html (and index.html's Featured
+       picks) to build this project's card — WITHOUT running any of the
+       JS below or loading its media. Keep title/tagline/roles/tags here
+       in sync with the same fields you'd otherwise repeat in `project`;
+       the script below pulls them from here via `...card` so you only
+       actually write them once. `thumbnail` is only used for the card. -->
+  <script type="application/json" id="card-data">
+    {
+      "title": "Project Title",
+      "tagline": "One or two sentences describing the project.",
+      "roles": "Your role(s) on the project",
+      "tags": ["Unreal Engine", "VR"],
+      "thumbnail": "/assets/images/project-slug/splash.jpg"
+    }
+  </script>
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
   <script>
+    const card = JSON.parse(document.getElementById('card-data').textContent);
     const project = {
-      title: 'Project Title',
-      tagline: 'One or two sentences describing the project.',
-      roles: 'Your role(s) on the project',
-      tags: ['Unreal Engine', 'VR'],
+      ...card,
 
       // Optional — delete this key if there's no single hero image/video.
       // For a local hero video (type: 'video'), it plays as a normal

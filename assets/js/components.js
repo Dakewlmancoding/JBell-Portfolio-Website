@@ -36,6 +36,44 @@ function projectCard({ image = '', title, roles, description, tags = [], href })
   `;
 }
 
+// ---------- AUTO-LOADED PROJECT CARDS ----------
+// Reads a project page's <script type="application/json" id="card-data">
+// block and turns it into a projectCard(). Uses fetch() + DOMParser, so
+// none of that page's own <script> tags run and none of its images or
+// videos start loading — only the thumbnail we actually build a card
+// with ever gets requested.
+async function fetchProjectCard(href) {
+  const res = await fetch(href);
+  const html = await res.text();
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const dataEl = doc.getElementById('card-data');
+  if (!dataEl) return null;
+  const card = JSON.parse(dataEl.textContent);
+  return projectCard({
+    image: card.thumbnail,
+    title: card.title,
+    roles: card.roles,
+    description: card.tagline,
+    tags: card.tags,
+    href
+  });
+}
+
+// Loads every project page listed for `category` in PROJECT_INDEX (see
+// assets/js/project-index.js) into the element with id `containerId`.
+// Shows `emptyMessage` instead if that category has no projects yet.
+async function loadCategoryCards(category, containerId, emptyMessage = 'Nothing here yet — check back soon!') {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const hrefs = (typeof PROJECT_INDEX !== 'undefined' && PROJECT_INDEX[category]) || [];
+  if (hrefs.length === 0) {
+    container.innerHTML = `<p class="project-grid-empty">${emptyMessage}</p>`;
+    return;
+  }
+  const cards = await Promise.all(hrefs.map(fetchProjectCard));
+  container.innerHTML = cards.filter(Boolean).join('');
+}
+
 // ---------- EMBEDS (YouTube / Google Drive / blueprintue) ----------
 // Paste whatever URL you'd naturally copy for each site — a normal
 // watch/share link, not a special embed link. These convert it for you.
