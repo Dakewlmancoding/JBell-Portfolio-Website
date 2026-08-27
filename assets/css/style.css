@@ -408,6 +408,25 @@ img { max-width: 100%; display: block; }
 
 .mute-toggle:hover { background: rgba(90,90,90,0.8); }
 
+/* ---------- AUDIO ---------- */
+.audio-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg-2);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* The audio button has no video frame to overlay, so unlike the video
+   mute-toggle it's always visible instead of hover-to-reveal. */
+.audio-wrap .mute-toggle {
+  position: static;
+  opacity: 1;
+}
+
 /* A text-media block with no media — plain, centered paragraph text. */
 .text-block {
   max-width: 760px;

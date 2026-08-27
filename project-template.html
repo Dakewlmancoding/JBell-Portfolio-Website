@@ -102,13 +102,14 @@ Second paragraph — each line becomes its own <p>. Supports *italics*,
               // Omit `media` entirely for a plain, centered text block,
               // or omit `text` entirely for a plain, centered media block.
               media: '/assets/images/project-slug/splash.jpg',
-              // 'image' (default) | 'video' (local .mp4/.webm) | 'youtube'
-              // | 'gdrive' | 'blueprintue' — for the embed types, just
-              // paste the normal URL you'd copy from that site. 'youtube'
-              // is always a plain, normal embed (controls and all) —
-              // YouTube doesn't give a reliable way to strip its UI down,
-              // so muteToggle/hideControls/autoplay/loop/muted below only
-              // do anything for 'video'.
+              // 'image' (default) | 'video' (local .mp4/.webm) | 'audio'
+              // (local .mp3/.wav/etc. — just a speaker button, never plays
+              // by default) | 'youtube' | 'gdrive' | 'blueprintue' — for
+              // the embed types, just paste the normal URL you'd copy
+              // from that site. 'youtube' is always a plain, normal embed
+              // (controls and all) — YouTube doesn't give a reliable way
+              // to strip its UI down, so muteToggle/hideControls/autoplay/
+              // loop/muted below only do anything for 'video'.
               mediaType: 'image',
               // 'video' only — false (default) is a silent looping clip;
               // true adds a hover-to-reveal speaker button so the viewer

@@ -133,10 +133,51 @@ function videoTag(media, { muteToggle = false, hideControls = true, autoplay = t
   `;
 }
 
+// Wired to the button's onclick — finds its paired <audio> and toggles
+// play/pause, swapping the icon and label to match.
+function toggleAudioPlay(button) {
+  const audio = button.previousElementSibling;
+  if (audio.paused) {
+    audio.play();
+    button.innerHTML = MUTE_ICON_UNMUTED;
+    button.setAttribute('aria-label', 'Pause audio');
+  } else {
+    audio.pause();
+    button.innerHTML = MUTE_ICON_MUTED;
+    button.setAttribute('aria-label', 'Play audio');
+  }
+}
+
+// If the clip finishes on its own (no loop), reset the button back to
+// its "play" state instead of leaving it stuck showing "playing".
+function resetAudioButton(audio) {
+  const button = audio.nextElementSibling;
+  button.innerHTML = MUTE_ICON_MUTED;
+  button.setAttribute('aria-label', 'Play audio');
+}
+
+// A local audio file. Never plays by default — just the same speaker
+// button used for video mute-toggling, except here it's the only visual
+// (no video frame to overlay), so it's always visible rather than
+// hover-to-reveal, and clicking it starts/stops playback instead of
+// muting/unmuting.
+function audioTag(media) {
+  return `
+    <div class="audio-wrap">
+      <audio src="${media}" onended="resetAudioButton(this)"></audio>
+      <button type="button" class="mute-toggle audio-toggle" aria-label="Play audio" onclick="toggleAudioPlay(this)">${MUTE_ICON_MUTED}</button>
+    </div>
+  `;
+}
+
 // ---------- MEDIA TAG (shared helper) ----------
 // Renders the right thing for mediaType:
 //   'image'       -> <img>  (also covers GIFs)
 //   'video'       -> local .mp4/.webm file — see videoTag's options below
+//   'audio'       -> local .mp3/.wav/etc. file — a speaker button (same
+//                    look as the video mute-toggle), always visible since
+//                    there's no video frame for it to overlay. Never plays
+//                    by default; click to play, click again to pause.
 //   'youtube'     -> a plain, normal YouTube embed (paste a normal watch/share
 //                    URL) — YouTube's own player, controls and all. There's
 //                    no reliable way to fully strip a YouTube embed's UI (see
@@ -151,6 +192,8 @@ function mediaTag(media, mediaType = 'image', options = {}) {
   switch (mediaType) {
     case 'video':
       return videoTag(media, options);
+    case 'audio':
+      return audioTag(media);
     case 'youtube':
       return embedFrame(`https://www.youtube.com/embed/${extractYouTubeId(media)}`);
     case 'gdrive':
@@ -185,7 +228,7 @@ function parseMarkdown(text) {
 //            Optional; omit it entirely for a plain, centered media block.
 // media:     path/URL to the image, video, or embed (see mediaTag above) —
 //            optional; omit it entirely for a plain, centered text block
-// mediaType:    'image' (default) | 'video' | 'youtube' | 'gdrive' | 'blueprintue'
+// mediaType:    'image' (default) | 'video' | 'audio' | 'youtube' | 'gdrive' | 'blueprintue'
 // muteToggle:   'video' only — false (default) is a plain clip; true adds
 //               a hover-to-reveal speaker button letting the viewer
 //               un-mute/re-mute it.
