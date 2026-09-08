@@ -13,7 +13,12 @@ async function loadInclude(targetId, url) {
 }
 
 function highlightActiveNav() {
-  const current = document.body.dataset.page;
+  // Project pages live in /projects/<category>/ and are all copied from the
+  // same template, so their body[data-page] can't be trusted to name the
+  // right nav tab — derive the category from the folder instead. Everything
+  // else uses its own body[data-page].
+  const projectMatch = window.location.pathname.match(/\/projects\/([^/]+)\//);
+  const current = projectMatch ? projectMatch[1] : document.body.dataset.page;
   document.querySelectorAll('#site-nav a[data-page]').forEach((link) => {
     link.classList.toggle('active', link.dataset.page === current);
   });
