@@ -477,6 +477,33 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
+/* ---------- PDF EMBED (reusable component) ---------- */
+.pdf-embed {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.pdf-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.pdf-fallback {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+.pdf-fallback a { color: var(--torch-light); }
+.pdf-fallback a:hover { color: var(--torch); }
+
 /* ---------- PROJECT DETAIL PAGE ---------- */
 .project-hero {
   padding: 3.5rem 3rem 2.5rem;

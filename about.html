@@ -8,14 +8,40 @@
   <link rel="icon" type="image/png" href="/assets/images/favicon-256.png" />
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
   <link rel="stylesheet" href="/assets/css/style.css" />
+  <style>
+    /* Run this page's body text 2px smaller than the site default. */
+    :root {
+      --font-size-body: calc(clamp(1rem, 1.2vw, 2rem) - 2px);
+    }
+
+    /* Keep the portrait a sensible size rather than letting it fill the
+       whole column — it's a tall headshot. */
+    #about-intro .tm-media img {
+      max-height: 520px;
+      width: auto;
+      margin: 0 auto;
+    }
+
+    /* Page-specific: spacing around the résumé block. The photo/text row
+       above it is a shared .text-media block and needs nothing here. */
+    .about-resume {
+      padding: 1rem 3rem 4rem;
+    }
+
+    @media (max-width: 640px) {
+      .about-resume { padding: 1rem 1.5rem 3rem; }
+    }
+  </style>
 </head>
 <body data-page="about">
   <div class="page-shell">
     <div id="site-nav"></div>
 
-    <section class="page-content">
-      <h1>About</h1>
-      <p>This page is coming soon.</p>
+    <section id="about-intro"></section>
+
+    <section class="about-resume">
+      <h2 class="section-heading">Résumé</h2>
+      <div id="about-resume-embed"></div>
     </section>
 
     <div id="site-footer"></div>
@@ -23,5 +49,34 @@
 
   <script src="/assets/js/include.js"></script>
   <script src="/assets/js/components.js"></script>
+  <script>
+    // Photo on the left, text on the right — reuses the shared
+    // textMediaBlock component (reverse: true puts media on the left).
+    document.getElementById('about-intro').innerHTML = textMediaBlock({
+      reverse: true,
+      media: '/assets/images/profile.jpg',
+      mediaType: 'image',
+      text: `Hey there!
+
+My name is Jack Bell. I'm a developer specializing in XR, audio systems, internal tools/automation, and unique game mechanics. I have well over a decade of programming experience, and in that time I’ve had the pleasure of working on a wide variety of interesting projects, with an even wider variety of cool people!  The main through line that's been present for my whole career, though, has been my passion to help others do their best. 
+
+Even before I started my work in the games industry, I ran a business teaching older folk and young kids alike how best to use their technology. Be that explaining the differences of Google docs vs Google Drive, wrangling printer drivers, or teaching Minecraft's redstone mechanics, I left my clients feeling empowered to use their technology how they wanted.
+
+As a young game developer, I maintained my reputation as someone who makes others’ lives easier. Many of my early projects saw me develop a veritable hardware store's worth of internal tools used by everyone from level designers to voice actors. I took great pride in  seeing how the work I did brought joy to not only the players, but also to my team who were able to focus on the parts of their jobs they enjoy the most.
+
+Later as a leader, my goal remained fixed: help talented people do their best work and help them enjoy doing it! Even if I'm doing that by making sure a stand up doesn't last longer than 30 minutes or deciphering a cross department email chain, I can still enjoy my own work knowing that I'm allowing my teams to rise to any occasion. And when my expertise is needed, or even if we're just crunching with all hands on deck,  I have no qualms about diving into the fray with everyone doing whatever I can to help, be that writing the function libraries, the documentation, or the follow up to that one bug report where the player’s just been holding the controller upside down. 
+
+I love working with skilled people to unlock their full abilities, learning from them along the way, and getting to make some truly incredible things. I’d love to work with you too!
+`
+    });
+
+    // Résumé embedded as a PDF, with open/download fallback links for
+    // browsers that won't render a PDF in-page. Drop the file at
+    // /assets/docs/resume.pdf (or change the path below).
+    document.getElementById('about-resume-embed').innerHTML = pdfEmbed('/assets/docs/resume.pdf', {
+      title: 'Jack Bell — Résumé',
+      height: '1100px'
+    });
+  </script>
 </body>
 </html>

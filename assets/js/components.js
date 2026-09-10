@@ -193,6 +193,24 @@ function audioTag(media) {
   `;
 }
 
+// ---------- PDF EMBED ----------
+// Embeds a PDF inline (via <iframe>) with an open/download fallback for
+// browsers and mobile devices that won't render a PDF in-page.
+// src:    path/URL to the .pdf
+// title:  accessible label for the frame
+// height: CSS height for the embed box (e.g. '900px', '120vh')
+function pdfEmbed(src, { title = 'Document', height = '900px' } = {}) {
+  return `
+    <div class="pdf-embed" style="height:${height}">
+      <iframe src="${src}" title="${title}" loading="lazy"></iframe>
+    </div>
+    <p class="pdf-fallback">
+      Not loading? <a href="${src}" target="_blank" rel="noopener">Open it in a new tab</a>
+      or <a href="${src}" download>download the PDF</a>.
+    </p>
+  `;
+}
+
 // ---------- MEDIA TAG (shared helper) ----------
 // Renders the right thing for mediaType:
 //   'image'       -> <img>  (also covers GIFs)
